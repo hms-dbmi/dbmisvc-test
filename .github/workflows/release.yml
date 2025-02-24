@@ -16,7 +16,10 @@ jobs:
         python-version: "3.11"
     - name: Install Python packages
       run: |
-        python -m pip install --upgrade pip wheel twine
+        python -m pip install build
+    - name: Build distribution
+      run: |
+        python -m build
     - uses: cycjimmy/semantic-release-action@v4
       id: semantic
       env:
