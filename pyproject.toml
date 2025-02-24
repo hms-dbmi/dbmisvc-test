@@ -23,7 +23,7 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=75.8.0", "wheel"]
+requires = ["setuptools>=75.8.0", "wheel", "twine"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
