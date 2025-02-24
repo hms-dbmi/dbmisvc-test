@@ -8,6 +8,7 @@ import responses
 from dbmi_client.settings import dbmi_settings
 
 UUID_PATTERN = "[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}"
+JSON_CONTENT_TYPE = "application/json"
 
 
 def mock_fileservice_download_archivefile_response(
@@ -60,7 +61,7 @@ def mock_fileservice_create_archivefile_response(token: str, archivefile_uuid: s
             "uuid": archivefile_uuid,
         },
         status=201,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[responses.matchers.header_matcher({"Authorization": f"Token {token}"})],
     )
 
@@ -86,7 +87,7 @@ def mock_fileservice_get_archivefiles_response(
             archivefile,
         ],
         status=200,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[
             responses.matchers.header_matcher({"Authorization": f"Token {token}"}),
             responses.matchers.query_param_matcher({"uuids": archivefile_uuid}),
@@ -113,7 +114,7 @@ def mock_fileservice_get_archivefile_response(
         re.compile(rf"^{dbmi_settings.FILESERVICE_URL}/filemaster/api/file/{archivefile_uuid}/?"),
         json=archivefile,
         status=200,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[
             responses.matchers.header_matcher({"Authorization": f"Token {token}"}),
         ],
@@ -154,7 +155,7 @@ def mock_fileservice_archivefile_post_response(
             },
         },
         status=201,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[responses.matchers.header_matcher({"Authorization": f"Token {token}"})],
     )
 
@@ -185,7 +186,7 @@ def mock_fileservice_archivefile_download_response(
             "url": download_url,
         },
         status=201,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[responses.matchers.header_matcher({"Authorization": f"Token {token}"})],
     )
 
@@ -212,7 +213,7 @@ def mock_fileservice_uploaded_archivefile_response(token: str, archivefile_uuid:
             "uuid": str(uuid.uuid4()),
         },
         status=201,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[
             responses.matchers.header_matcher({"Authorization": f"Token {token}"}),
         ],
@@ -274,7 +275,7 @@ def mock_reg_get_names_response(jwt: str, names: dict[str, dict[str, str]] = Non
         re.compile(rf"^{dbmi_settings.REG_URL}/api/register/get_names/?.*$"),
         json=names,
         status=201,
-        content_type="application/json",
+        content_type=JSON_CONTENT_TYPE,
         match=[
             responses.matchers.header_matcher({"Authorization": f"JWT {jwt}"}),
         ],
